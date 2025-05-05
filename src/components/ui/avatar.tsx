@@ -1,33 +1,14 @@
+// components/ui/avatar.tsx
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
-interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
-  src?: string;
-  fallback?: string;
-  alt?: string;
-  size?: string;
+export function Avatar({ src, alt, className }: { src: string; alt?: string; className?: string }) {
+  return (
+    <div className={`relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-200 ${className}`}>
+      {src ? (
+        <img src={src} alt={alt} className="h-full w-full object-cover" />
+      ) : (
+        <span className="text-sm text-gray-500 w-full h-full flex items-center justify-center">?</span>
+      )}
+    </div>
+  );
 }
-
-export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ src, fallback = "?", alt = "Avatar", size = "40px", className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "rounded-full bg-gray-300 flex items-center justify-center text-sm text-white font-medium overflow-hidden",
-          className
-        )}
-        style={{ width: size, height: size }}
-        {...props}
-      >
-        {src ? (
-          <img src={src} alt={alt} className="w-full h-full object-cover" />
-        ) : (
-          fallback
-        )}
-      </div>
-    );
-  }
-);
-
-Avatar.displayName = "Avatar";
