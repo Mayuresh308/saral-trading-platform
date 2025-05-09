@@ -1,29 +1,9 @@
-// // app/api/news/route.ts
-// import { NextResponse } from 'next/server';
-
-// export async function GET() {
-//   try {
-//     const res = await fetch("https://backend-swis.onrender.com/news"); // ← change to your deployed backend URL
-//     const data = await res.json();
-//     return NextResponse.json(data);
-//   } catch (error) {
-//     return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 });
-//   }
-// }
-
-
-
-
-
-
-
-
 // app/api/news/route.ts
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const res = await fetch("https://backend-swis.onrender.com/news", {
+    const res = await fetch("https://backend-7xk0.onrender.com/news", {
       cache: "no-store", // prevent edge/server cache
     });
     const data = await res.json();
@@ -38,3 +18,5 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch news" }, { status: 500 });
   }
 }
+
+
