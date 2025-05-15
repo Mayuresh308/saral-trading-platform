@@ -1,3 +1,4 @@
+import Image from 'next/image';
 export default function LearnPage() {
   return (
     <div className="bg-gray-100 min-h-screen text-gray-800">
@@ -56,58 +57,85 @@ export default function LearnPage() {
 
         {/* Articles */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Articles</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              {
-                title: 'How to Read Stock Market Trends',
-                desc: 'Learn the essentials of reading stock market trends and making informed decisions.',
-              },
-              {
-                title: 'Cryptocurrency for Beginners',
-                desc: 'A comprehensive guide to getting started with cryptocurrency investing.',
-              },
-              {
-                title: 'The Psychology of Trading',
-                desc: 'Explore how emotions can impact your trading decisions and how to manage them.',
-              },
-              {
-                title: 'Forex Market Insights',
-                desc: 'Delve into the world of Forex trading and discover key insights.',
-              },
-            ].map((article, i) => (
-              <div key={i} className="bg-white rounded-lg shadow p-4 hover:shadow-lg">
-                <h3 className="font-semibold">{article.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">{article.desc} <a href="#" className="text-blue-500 hover:underline">Read more</a></p>
-              </div>
-            ))}
-          </div>
-        </section>
+  <h2 className="text-xl font-semibold mb-4">Articles</h2>
+  <div className="grid md:grid-cols-2 gap-4">
+    {[
+      {
+        title: 'How to Read Stock Market Trends',
+        desc: 'Learn the essentials of reading stock market trends and making informed decisions.',
+        link: 'https://groww.in/blog/how-to-read-stock-charts',
+      },
+      {
+        title: 'Cryptocurrency for Beginners',
+        desc: 'A comprehensive guide to getting started with cryptocurrency investing.',
+        link: 'https://www.coursera.org/in/articles/how-does-cryptocurrency-work',
+      },
+      {
+        title: 'The Psychology of Trading',
+        desc: 'Explore how emotions can impact your trading decisions and how to manage them.',
+        link: 'https://www.investopedia.com/terms/t/trading-psychology.asp#:~:text=Trading%20psychology%20is%20the%20emotional,that%20might%20be%20too%20risky.',
+      },
+      {
+        title: 'Forex Market Insights',
+        desc: 'Delve into the world of Forex trading and discover key insights.',
+        link: 'https://www.forex.com/en/news-and-analysis/financial-market-insights/',
+      },
+    ].map((article, i) => (
+      <div key={i} className="bg-white rounded-lg shadow p-4 hover:shadow-lg">
+        <h3 className="font-semibold">{article.title}</h3>
+        <p className="text-sm text-gray-600 mt-1">
+          {article.desc}{' '}
+          <a
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            Read more
+          </a>
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
 
         {/* Quizzes */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Quizzes</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {[
-              {
-                title: 'Stock Market Basics Quiz',
-                desc: 'Test your understanding of stock market fundamentals with this quiz.',
-              },
-              {
-                title: 'Cryptocurrency Knowledge Test',
-                desc: 'Assess your knowledge of cryptocurrency with our interactive quiz.',
-              },
-            ].map((quiz, i) => (
-              <div key={i} className="bg-white rounded-lg shadow p-4 hover:shadow-lg flex flex-col justify-between">
-                <div>
-                  <h3 className="font-semibold">{quiz.title}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{quiz.desc}</p>
-                </div>
-                <button className="mt-4 self-start bg-black text-white px-4 py-1 text-sm rounded hover:bg-gray-800">Start Quiz</button>
-              </div>
-            ))}
-          </div>
-        </section>
+  <h2 className="text-xl font-semibold mb-4">Quizzes</h2>
+  <div className="grid md:grid-cols-2 gap-4">
+    {[
+      {
+        title: 'Stock Market Basics Quiz',
+        desc: 'Test your understanding of stock market fundamentals with this quiz.',
+        link: 'https://www.eqsis.com/stock-market-quiz-level-1/',
+      },
+      {
+        title: 'Cryptocurrency Knowledge Test',
+        desc: 'Assess your knowledge of cryptocurrency with our interactive quiz.',
+        link: 'https://www.babypips.com/crypto/quizzes',
+      },
+    ].map((quiz, i) => (
+      <div key={i} className="bg-white rounded-lg shadow p-4 hover:shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 className="font-semibold">{quiz.title}</h3>
+          <p className="text-sm text-gray-600 mt-1">{quiz.desc}</p>
+        </div>
+        <a
+          href={quiz.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 self-start"
+        >
+          <button className="bg-black text-white px-4 py-1 text-sm rounded hover:bg-gray-800">
+            Start Quiz
+          </button>
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
+
       </main>
 
       {/* Footer */}

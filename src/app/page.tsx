@@ -11,7 +11,7 @@ export default function HomePage() {
           <Link href="/" className="text-2xl font-bold text-blue-600">ALTRA</Link>
           <div className="hidden md:flex items-center space-x-6 text-sm">
           <Link href="/markets">Markets</Link>
-          <Link href="/screeners/stocks">Screeners</Link>
+          {/* <Link href="/screeners/stocks">Screeners</Link> */}
           <Link href="/news">News</Link>
           <Link href="/learn">Learn</Link>
           <Link href="/portfolio">Portfolio</Link>

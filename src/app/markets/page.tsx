@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import TradingViewWidget from "../../components/TradingViewWidget";
 import TradingViewHeatmapWidget from "../../components/TradingViewHeatmapWidget";
+import Stocks from "@/components/Stocks"; // or adjust the path based on your project structure
+import stocksMarketChart from "@/components/StockChart"; // or adjust the path based on your project structure
+import StockChart from '@/components/StockChart'
 
 export default function MarketsPage() {
   const [activeTab, setActiveTab] = useState("Stocks");
@@ -36,136 +39,11 @@ export default function MarketsPage() {
       {/* Conditional content */}
       {activeTab === "Stocks" && (
         <>
-          {/* Section 1: Market Indices */}
-          <section className="bg-white py-12">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-xl font-semibold mb-6">Market Indices</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { name: "S&P 500", value: "4,532.15", change: "+1.2%", isUp: true },
-                  { name: "NASDAQ", value: "14,235.45", change: "-0.8%", isUp: false },
-                  { name: "DOW", value: "35,245.67", change: "+0.5%", isUp: true },
-                  { name: "VIX", value: "18.45", change: "-2.3%", isUp: false },
-                ].map((market, index) => (
-                  <div
-                    key={index}
-                    className="p-6 bg-gray-50 rounded-xl shadow-sm hover:shadow transition"
-                  >
-                    <div className="text-sm text-gray-500 uppercase tracking-wide mb-1">{market.name}</div>
-                    <div className="text-2xl font-bold mb-1">{market.value}</div>
-                    <div
-                      className={`text-sm font-semibold ${
-                        market.isUp ? "text-green-500" : "text-red-500"
-                      }`}
-                    >
-                      {market.change}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          {/* Section 2: Top Movers */}
-          <section className="bg-gray-50 py-12">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-xl font-semibold mb-6">Top Movers</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Top Gainers */}
-                <div className="bg-white p-5 rounded-xl shadow-sm">
-                  <h3 className="text-lg font-semibold mb-4">Top Gainers</h3>
-                  <ul className="space-y-3">
-                    {[
-                      { symbol: "NVDA", name: "NVIDIA Corp", price: "$485.25", change: "+8.45%" },
-                      { symbol: "AMD", name: "Advanced Micro Devices", price: "$125.75", change: "+6.23%" },
-                    ].map((stock, i) => (
-                      <li key={i} className="flex justify-between">
-                        <div>
-                          <div className="font-bold">{stock.symbol}</div>
-                          <div className="text-sm text-gray-500">{stock.name}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-semibold">{stock.price}</div>
-                          <div className="text-green-500 text-sm">{stock.change}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          <Stocks />     
+         
 
-                {/* Top Losers */}
-                <div className="bg-white p-5 rounded-xl shadow-sm">
-                  <h3 className="text-lg font-semibold mb-4">Top Losers</h3>
-                  <ul className="space-y-3">
-                    {[
-                      { symbol: "META", name: "Meta Platforms Inc", price: "$285.35", change: "-4.25%" },
-                      { symbol: "NFLX", name: "Netflix Inc", price: "$375.45", change: "-3.78%" },
-                    ].map((stock, i) => (
-                      <li key={i} className="flex justify-between">
-                        <div>
-                          <div className="font-bold">{stock.symbol}</div>
-                          <div className="text-sm text-gray-500">{stock.name}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-semibold">{stock.price}</div>
-                          <div className="text-red-500 text-sm">{stock.change}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Most Active */}
-                <div className="bg-white p-5 rounded-xl shadow-sm">
-                  <h3 className="text-lg font-semibold mb-4">Most Active</h3>
-                  <ul className="space-y-3">
-                    {[
-                      { symbol: "AAPL", name: "Apple Inc", price: "$175.34", change: "+2.45%" },
-                      { symbol: "TSLA", name: "Tesla Inc", price: "$242.68", change: "-1.23%" },
-                    ].map((stock, i) => (
-                      <li key={i} className="flex justify-between">
-                        <div>
-                          <div className="font-bold">{stock.symbol}</div>
-                          <div className="text-sm text-gray-500">{stock.name}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-semibold">{stock.price}</div>
-                          <div
-                            className={`text-sm ${
-                              stock.change.startsWith("+") ? "text-green-500" : "text-red-500"
-                            }`}
-                          >
-                            {stock.change}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 3: Chart */}
-          <section className="bg-white py-12">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-xl font-semibold mb-4">Market Chart (Live)</h2>
-              <div className="bg-gray-50 rounded-xl p-6 h-[600px] shadow-sm">
-                <TradingViewWidget />
-              </div>
-            </div>
-          </section>
-
-          {/* Section 4: Heatmap */}
-          <section className="bg-gray-50 py-12">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-xl font-semibold mb-4">Market Heatmap</h2>
-              <div className="bg-white p-6 h-[600px] rounded-xl flex items-center justify-center text-gray-400 shadow-sm">
-                <TradingViewHeatmapWidget />
-              </div>
-            </div>
-          </section>
-
+          
           {/* Section 5: Global Indices */}
           <section className="bg-white py-12">
             <div className="max-w-7xl mx-auto px-6">
@@ -228,7 +106,7 @@ export default function MarketsPage() {
           </section>
 
           {/* Section 7: CTA */}
-          <section className="bg-gray-50 py-12">
+          {/* <section className="bg-gray-50 py-12">
             <div className="max-w-7xl mx-auto px-6 text-center">
               <Link
                 href="/charts"
@@ -237,7 +115,7 @@ export default function MarketsPage() {
                 Explore Full Charts →
               </Link>
             </div>
-          </section>
+          </section> */}
         </>
       )}
 
