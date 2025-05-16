@@ -142,7 +142,6 @@ import { useEffect, useState } from 'react';
 import TradingViewWidget from "./TradingViewWidget";
 import TradingViewHeatmapWidget from "./TradingViewHeatmapWidget";
 import StockChart from '@/components/StockChart';
-// import StockHeatmap from './ui/StockHeatmap';
 
 type MarketIndex = {
   name: string;
@@ -172,13 +171,14 @@ type ApiResponse<T> = {
   data: T;
 };
 
-function isValidResponse<T>(obj: any): obj is ApiResponse<T> {
+// Avoid using 'any' and make 'obj' typed explicitly
+function isValidResponse<T>(obj: unknown): obj is ApiResponse<T> {
   return (
-    obj &&
     typeof obj === "object" &&
-    "success" in obj &&
-    typeof obj.success === "boolean" &&
-    "data" in obj
+    obj !== null &&
+    'success' in obj &&
+    typeof (obj as { success: unknown }).success === 'boolean' &&
+    'data' in obj
   );
 }
 
@@ -275,7 +275,6 @@ const Stocks = () => {
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-xl font-semibold mb-4">Market Chart (Live)</h2>
           <div className="bg-gray-50 rounded-xl p-6 h-[600px] shadow-sm">
-            {/* <TradingViewWidget /> */}
             <StockChart />
           </div>
         </div>
@@ -295,3 +294,4 @@ const Stocks = () => {
 };
 
 export default Stocks;
+// import { useEffect, useState } from 'react';
