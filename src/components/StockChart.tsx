@@ -168,15 +168,165 @@
 
 
 
+// 'use client';
+
+// import { useEffect, useRef, useState } from 'react';
+// import {
+//   createChart,
+//   ColorType,
+//   UTCTimestamp,
+//   ISeriesApi,
+//   CandlestickData,
+// } from 'lightweight-charts';
+
+// interface CandleData {
+//   datetime: string;
+//   open: string;
+//   high: string;
+//   low: string;
+//   close: string;
+//   volume: string;
+// }
+
+// interface ApiResponse {
+//   success: boolean;
+//   data?: {
+//     values?: CandleData[];
+//   };
+// }
+
+// export default function StockChart() {
+//   const chartContainerRef = useRef<HTMLDivElement>(null);
+//   const chartRef = useRef<ReturnType<typeof createChart>>();
+//   const candleSeriesRef = useRef<ISeriesApi<'Candlestick'>>();
+//   const [isMounted, setIsMounted] = useState(false);
+
+//   const fetchData = async () => {
+//     try {
+//       const response = await fetch('https://backend-7xk0.onrender.com/stocks/market-chart');
+//       const json: ApiResponse = await response.json();
+
+//       if (json.success && json.data?.values) {
+//         const formattedData: CandlestickData[] = json.data.values.map((item) => {
+//           const time = Math.floor(
+//             new Date(item.datetime + 'T00:00:00Z').getTime() / 1000
+//           ) as UTCTimestamp;
+
+//           return {
+//             time,
+//             open: parseFloat(item.open),
+//             high: parseFloat(item.high),
+//             low: parseFloat(item.low),
+//             close: parseFloat(item.close),
+//           };
+//         });
+
+//         formattedData.sort((a, b) => (a.time as number) - (b.time as number));
+
+
+//         console.log('Formatted Candlestick Data:', formattedData); // ✅ Debug log
+
+//         if (candleSeriesRef.current && formattedData.length > 0) {
+//           candleSeriesRef.current.setData(formattedData);
+//           chartRef.current?.timeScale().fitContent();
+//         }
+//       }
+//     } catch (err) {
+//       console.error('Failed to load chart data', err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (!chartContainerRef.current) return;
+
+//     const chart = createChart(chartContainerRef.current, {
+//       layout: {
+//         background: { type: ColorType.Solid, color: '#131722' },
+//         textColor: '#d1d4dc',
+//       },
+//       width: chartContainerRef.current.clientWidth,
+//       height: 500,
+//       grid: {
+//         vertLines: { color: '#2B2B43' },
+//         horzLines: { color: '#2B2B43' },
+//       },
+//       crosshair: {
+//         mode: 1,
+//       },
+//       rightPriceScale: {
+//         borderColor: '#485c7b',
+//       },
+//       timeScale: {
+//         borderColor: '#485c7b',
+//       },
+//     });
+
+//     chartRef.current = chart;
+
+//     candleSeriesRef.current = chart.addCandlestickSeries({
+//       upColor: '#26a69a',
+//       downColor: '#ef5350',
+//       wickUpColor: '#26a69a',
+//       wickDownColor: '#ef5350',
+//       borderVisible: false,
+//     });
+
+//     const handleResize = () => {
+//       if (chartContainerRef.current) {
+//         chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+//         chart.timeScale().fitContent();
+//       }
+//     };
+
+//     window.addEventListener('resize', handleResize);
+//     setIsMounted(true);
+//     return () => {
+//       window.removeEventListener('resize', handleResize);
+//       chart.remove();
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//   if (!isMounted) return;
+
+//   fetchData(); // Initial fetch
+
+//   const interval = setInterval(() => {
+//     fetchData();
+//   }, 20000); // 20 seconds
+
+//   return () => clearInterval(interval); // Clean up on unmount
+// }, [isMounted]);
+
+
+//   return (
+//     <div
+//       ref={chartContainerRef}
+//       className="w-full"
+//       style={{ height: '500px', backgroundColor: '#131722' }}
+//     />
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import {
   createChart,
   ColorType,
-  UTCTimestamp,
-  ISeriesApi,
-  CandlestickData,
+  type UTCTimestamp,
+  type ISeriesApi,
+  type CandlestickData,
 } from 'lightweight-charts';
 
 interface CandleData {
@@ -222,7 +372,6 @@ export default function StockChart() {
         });
 
         formattedData.sort((a, b) => (a.time as number) - (b.time as number));
-
 
         console.log('Formatted Candlestick Data:', formattedData); // ✅ Debug log
 
@@ -287,17 +436,16 @@ export default function StockChart() {
   }, []);
 
   useEffect(() => {
-  if (!isMounted) return;
+    if (!isMounted) return;
 
-  fetchData(); // Initial fetch
+    void fetchData(); // Initial fetch
 
-  const interval = setInterval(() => {
-    fetchData();
-  }, 20000); // 20 seconds
+    const interval = setInterval(() => {
+      void fetchData(); // Periodic fetch
+    }, 20000); // 20 seconds
 
-  return () => clearInterval(interval); // Clean up on unmount
-}, [isMounted]);
-
+    return () => clearInterval(interval);
+  }, [isMounted]);
 
   return (
     <div

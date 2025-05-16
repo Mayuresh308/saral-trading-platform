@@ -5,8 +5,8 @@ import Link from "next/link";
 import TradingViewWidget from "../../components/TradingViewWidget";
 import TradingViewHeatmapWidget from "../../components/TradingViewHeatmapWidget";
 import Stocks from "@/components/Stocks"; // or adjust the path based on your project structure
-import stocksMarketChart from "@/components/StockChart"; // or adjust the path based on your project structure
-import StockChart from '@/components/StockChart'
+// import stocksMarketChart from "@/components/StockChart"; // or adjust the path based on your project structure
+// import StockChart from '@/components/StockChart'
 
 export default function MarketsPage() {
   const [activeTab, setActiveTab] = useState("Stocks");

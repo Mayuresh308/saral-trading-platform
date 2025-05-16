@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import DarkModeToggle from "@/components/DarkModeToggle";
+// import DarkModeToggle from "@/components/DarkModeToggle";
 
 export default function HomePage() {
   return (
